@@ -1,4 +1,5 @@
 # Claudecode_deepseekv4
+来源：[小白技巧-配置Vscode Claude Code 插件使用deepseek-v4-pro模型(ccswitch+claudecode extension)](https://www.bilibili.com/video/BV1kPoBBHEXS?vd_source=e5ec6153142cd56468f2c45b7eb9666e)  
 在vscode中使用模型为deepseeek-v4-pro的Claudecode  
 1.下载Claude Code for VS Code插件  
 <img width="960" height="1031" alt="image" src="https://github.com/user-attachments/assets/389a9ad1-5052-47bb-b2c3-0f6f198b445a" />

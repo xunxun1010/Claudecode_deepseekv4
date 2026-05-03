@@ -5,6 +5,46 @@
 本文涉及内容:  
 1.基础交互 2.复杂任务处理 3.终端控制 4.回滚与上下文管理 5.图片与 Figma 设计稿还原   
 6.CLAUDE.md 项目记忆 7.Hook 8.Agent Skill 9.SubAgent 10.Plugin
+## 目录
+
+- [part1 实践：做一个代办软件](#part1-实践做一个代办软件)
+- [part2 模式与权限控制](#part2-模式与权限控制)
+  - [1.三种模式：](#1三种模式)
+  - [2.举例](#2举例)
+- [part3 Claude Code 里直接执行终端命令：这是它和普通聊天工具最大的区别之一](#part3-claude-code-里直接执行终端命令这是它和普通聊天工具最大的区别之一)
+- [part4 为什么自动模式下它还会向你确认命令？](#part4-为什么自动模式下它还会向你确认命令)
+  - [因为文件编辑和终端命令不是一个风险等级](#因为文件编辑和终端命令不是一个风险等级)
+- [part5 最高权限模式：dangerously-skip-permissions](#part5-最高权限模式dangerously-skip-permissions)
+- [part6 重构架构：从 HTML 单文件升级到 React + TypeScript + Vite](#part6-重构架构从-html-单文件升级到-react--typescript--vite)
+- [part7 当前终端一旦被开发服务占住，Claude Code 就没法继续正常处理你的新输入。](#part7-当前终端一旦被开发服务占住claude-code-就没法继续正常处理你的新输入)
+- [part8 回滚](#part8-回滚)
+- [part9 MCP](#part9-mcp)
+- [part10 常用设置](#part10-常用设置)
+- [part11 CLAUDE.md](#part11-claudemd)
+- [part12 项目级记忆和用户级记忆要分开理解](#part12-项目级记忆和用户级记忆要分开理解)
+- [part13 hook：把重复动作自动化](#part13-hook把重复动作自动化)
+  - [1.什么是hook](#1什么是hook)
+  - [2.hook适合做什么](#2hook适合做什么)
+  - [3.hook的思维方式](#3hook的思维方式)
+- [part14 agentskill：把常用套路沉淀成随时可调用的能力：高频、固定套路、对格式要求强。](#part14-agentskill把常用套路沉淀成随时可调用的能力高频固定套路对格式要求强)
+  - [eg：日报 Skill](#eg日报-skill)
+- [part15 subagent：不是模板，而是“分身”](#part15-subagent不是模板而是分身)
+  - [1.SubAgent 适合什么场景？](#1subagent-适合什么场景)
+  - [2.如何理解 SubAgent？](#2如何理解-subagent)
+- [part16 Plugin：把 Skill、SubAgent、Hook 等能力打包成一键安装包](#part16-plugin把-skillsubagenthook-等能力打包成一键安装包)
+  - [1.Plugin 的价值在哪里？](#1plugin-的价值在哪里)
+  - [2.前端设计类 Plugin 为什么特别值得关注？](#2前端设计类-plugin-为什么特别值得关注)
+- [part17 建议](#part17-建议)
+  - [1.小任务直接做，大任务先 Plan Mode](#1小任务直接做大任务先-plan-mode)
+  - [2.把 dangerously-skip-permissions 当作实验环境加速器，不要当默认配置](#2把-dangerously-skip-permissions-当作实验环境加速器不要当默认配置)
+  - [3.尽早写好 CLAUDE.md](#3尽早写好-claudemd)
+  - [4.重复性输出用 Skill，重分析任务用 SubAgent](#4重复性输出用-skill重分析任务用-subagent)
+  - [5.真正想做设计还原，尽量接 MCP](#5真正想做设计还原尽量接-mcp)
+  - [6.回滚只是应急，Git 仍然是正式版本控制核心](#6回滚只是应急git-仍然是正式版本控制核心)
+- [总结：你如何设计自己的 AI 开发工作流。](#总结你如何设计自己的-ai-开发工作流)
+
+
+
 ## part1 实践：做一个代办软件
 创建文件夹
 ```base
